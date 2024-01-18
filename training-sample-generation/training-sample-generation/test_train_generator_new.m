@@ -1,10 +1,23 @@
 function [sim_data, sample_numbers] = test_train_generator_new(attenuate, deg_res)
 %% Generates a training set with a specified number of current loops and batch size
 %Input params:
-% attenuate: 
-% deg_res:
+%-------------
+% attenuate: factor (\gamma) for reducing the maximum potential rate of change in the loop currents (dI/dt)
+% deg_res: image resolution in degrees
 % set: number of loops in the training set batches
 % batch_size: size of a training set batch
+%Output values:
+%-------------
+% sim_data: structure containing synthetic magnetic field and source parameter maps, having the following fields
+% --> maps: radial field data
+% --> maps_norm: normalized radial field data
+% --> svs: radial SV data
+% --> svs_norm: normalized radial SV data
+% --> pos: distribution of loop positions
+% --> rads: distribution of loop radii
+% --> Is: distribution of loop current intensities
+% --> depths: distribution of loop depths
+% --> dtIs: distribution of dI/dt values
 
 %orig outlp arguments: [sim_data, true_data, sample_batch_sizes]
 %clear all, close all;

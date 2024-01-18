@@ -1,10 +1,13 @@
-
 function BRR = total_field_approx_new(pars, long_size, lat_size)
-%% Generates the radial magnetic field of a loop model
+%% Generates the total radial magnetic field of a loop model
 %Input params:
+%-------------
 % pars: matrix containing all the parameters of every loop in the model
-%long_size: number of longitude bins to compute the radial MF for
-%lat_size: number of latitude bins to compute the radial MF for
+% long_size: number of longitude bins to compute the radial MF for
+% lat_size: number of latitude bins to compute the radial MF for
+%Output values:
+%--------------
+%BRR: vector containing radial magnetic field data [T]
 
 Roc = 3.478e6;
 mu = 4 * pi * 1e-7;

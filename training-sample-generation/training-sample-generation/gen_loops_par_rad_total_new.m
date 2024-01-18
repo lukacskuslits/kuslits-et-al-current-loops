@@ -2,33 +2,33 @@ function [pos_data, rad_data, I_data, depth_data, dtI_data, res, sv, rnorm, sv_n
 %% Generates a training set containing a varying set_size of current loops placed inside the outer core
 %% with differing loop parameters assigned randomly within the parameter ranges specified using REF!.m
 %Input params: 
-% set_size set_size of loop models in the given batch of the training set
+%-------------
+% set_size: set_size of loop models in the given batch of the training set
 % nloops: set_size of loops in each model in the batch
-% attenuate: factor for decreasing the maximum potential rate of change in the loop currents
+% attenuate: factor (\gamma) for reducing the maximum potential rate of change in the loop currents (dI/dt)
 % deg_res: resolution of output field maps in spherical coordinates (degrees)
 %Input files:
+%------------
 % coef_new.mat: matrix containing polynomial coeffitients used for the
     % approximations of diffusion screening
 % powers_new.mat: matrix containing polynomial powers used for the
     % approximations of diffusion screening
+%Output values:
+%--------------
+% pos_data: distribution of loop positions
+% rad_data: distribution of loop radii
+% I_data: distribution of loop current intensities
+% depth_data: distribution of loop depths
+% dtI_data: distribution of dI/dt values
+% res: radial field data
+% sv: radial SV data
+% rnorm: normalized radial field data
+% sv_norm: normalized radial SV data
+
 
 dt = 25*3.15e7;
 mu = 4*pi*1e-7;
-coef = load('coef_new.mat');
-coef = coef.coef;
-powers = load('powers_new.mat');
-powers = powers.powers;
-lat_dim = 180/deg_res;
-long_dim = 360/deg_res;
-
-X = ones(lat_dim*long_dim,3);
-powers = cast(powers, 'double');
-XX = repmat(X,[1,1,length(powers)]);
-powers = repmat(powers,[1,1, length(XX)]);
-powers = permute(powers, [3,2,1]);
-save('coef_use.mat', 'coef')
-save('powers_use.mat', 'powers')
-
+transform_coefficients_new(deg_res);
 
 pos_data=zeros(lat_dim, long_dim, set_size);
 rad_data=zeros(lat_dim, long_dim, set_size);
