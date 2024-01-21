@@ -4,7 +4,7 @@ function BRR = total_field_approx_new(pars, long_size, lat_size)
 %-------------
 % pars: matrix containing all the parameters of every loop in the model
 % long_size: number of longitude bins to compute the radial MF for
-% lat_size: number of latitude bins to compute the radial MF for
+% lat_size: number of latitude bins to compute the radial MF for 
 %Output values:
 %--------------
 %BRR: vector containing radial magnetic field data [T]
@@ -157,5 +157,3 @@ By = (y .* Bx) .* x.^(-1);
 
 Bz = C * (((a^2 - r.^2) .* E) + (alpha_2 .* K)) .* (2 .* alpha_2 .* beta).^(-1);
 end
-
-

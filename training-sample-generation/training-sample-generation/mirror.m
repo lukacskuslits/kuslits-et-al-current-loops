@@ -1,4 +1,15 @@
 function B=mirror(A,side,mode,domdef)
+%% Performs the reflection of an 2d array around the symmetry axis of a given side
+%Input params:
+%-------------
+% A: input array
+% side: dimension (side) {'row', 'column'}
+% mode: if 'coord', the reflection is performed on (geographic longitude) coordinate value vectors
+% domdef: domain size (in longitudes)
+%Output values:
+%-------------
+% B: reflected (flipped) array
+
 domx=length(A(:,1));
 domy=length(A(1,:));
 B=zeros(size(A));

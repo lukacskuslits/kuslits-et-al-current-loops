@@ -1,11 +1,11 @@
-function [sim_data, sample_numbers] = test_train_generator_new(attenuate, deg_res)
+function [sim_data, sample_numbers] = test_train_generator_new(set, batch_size, attenuate, deg_res)
 %% Generates a training set with a specified number of current loops and batch size
 %Input params:
 %-------------
+% set: number of loops in the training set batches
+% batch_size: size of each training set batch
 % attenuate: factor (\gamma) for reducing the maximum potential rate of change in the loop currents (dI/dt)
 % deg_res: image resolution in degrees
-% set: number of loops in the training set batches
-% batch_size: size of a training set batch
 %Output values:
 %-------------
 % sim_data: structure containing synthetic magnetic field and source parameter maps, having the following fields
@@ -73,8 +73,6 @@ function [sim_data, sample_numbers] = test_train_generator_new(attenuate, deg_re
 %     disp(set)
 %     disp('batch_size:')
 %     disp(batch_size)
-    set = 1:5:6;%25:10:175; %;%55:10:155;
-    batch_size = 2;
     sample_numbers = zeros(1,length(set));
     for ii = 1:length(set)
         disp('Nr. of sources in set:')
@@ -82,7 +80,7 @@ function [sim_data, sample_numbers] = test_train_generator_new(attenuate, deg_re
         try
             [pos_data_all, rad_data_all, I_data_all, depth_data_all, dtI_data_all, br_all, sv_all, rnorm_all, sv_norm_all] = gen_loops_par_rad_total_new(batch_size, set(ii), attenuate, deg_res);
         catch ME
-           disp(ME)
+           disp(getReport(ME,'extended'))
            break
         end
         sample_number = 0;
@@ -142,12 +140,15 @@ function [sim_data, sample_numbers] = test_train_generator_new(attenuate, deg_re
 %     simulated_vlong_maps_total = simulated_vlong_maps_total(:,:,2:end);
 
     
-%% Estimate field values and SV for forecasting
+%% Estimate field values and SV
+%% Load true field and SV values into a similar structure to be integrated 
+%% into the training set
     dt = 5*3.15e7;
     true_field_maps_raw = zeros(lat_dim, long_dim, 1);
     true_field_maps_norm = zeros(lat_dim, long_dim, 1);
     true_field_maps_log = zeros(lat_dim, long_dim, 1);
     
+    %Load GUFM-1 historical core field data
     test = load('test_core_new.txt','-ascii');
     ii = 1;
     for time = 1600:5:1975

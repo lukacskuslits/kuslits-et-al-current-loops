@@ -2,6 +2,9 @@ clear all, close all
 dt = 25*3.15e7;
 mu = 4*pi*1e-7;
 
+%TODO: We should only need 'coef_new.mat' and 'powers_new.mat', the rest can be computed using here:
+deg_res = 2;
+transform_coefficients_new(deg_res)
 % coef = load('coef_new.mat');
 % coef = coef.coef;
 % powers = load('powers_new.mat');
@@ -14,7 +17,7 @@ mu = 4*pi*1e-7;
 % save('coef_use.mat', 'coef')
 % save('powers_use.mat', 'powers')
 
-n = 1;  
+n = 100;  
 rmin = 3.25; %3.25; %original upper and lower vals for R
 rmax = 10; %10; %
 Imin = 2.2e8;

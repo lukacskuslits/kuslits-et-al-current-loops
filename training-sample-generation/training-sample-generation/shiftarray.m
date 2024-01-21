@@ -1,5 +1,13 @@
 function MS=shiftarray(M,d,side)
-
+%% Performs translation on an array
+%Input parameters:
+%-----------------
+% M: input array
+% d: translation distance (elements)
+% side: which dimension would you like to do the translation on ('row', 'col')
+%Ouptut values:
+%--------------
+% MS: shifted (translated) array
 
 %disp(M)
 

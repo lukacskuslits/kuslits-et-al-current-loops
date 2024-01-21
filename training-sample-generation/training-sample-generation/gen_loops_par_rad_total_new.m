@@ -28,6 +28,9 @@ function [pos_data, rad_data, I_data, depth_data, dtI_data, res, sv, rnorm, sv_n
 
 dt = 25*3.15e7;
 mu = 4*pi*1e-7;
+lat_dim = 180/deg_res;
+long_dim = 360/deg_res;
+
 transform_coefficients_new(deg_res);
 
 pos_data=zeros(lat_dim, long_dim, set_size);
@@ -124,7 +127,7 @@ parfor ii=1:set_size
         svnorm_i = (sv_i-min(sv_i))./(max(sv_i)-min(sv_i));
         sv_norm(:,:,ii) = reshape(svnorm_i, long_dim, lat_dim)';
     catch ME
-        disp(ME)
+        disp(getReport(ME,'extended'))
         rethrow(ME)
         poolobj = gcp('nocreate');
         delete(poolobj)
@@ -132,4 +135,3 @@ parfor ii=1:set_size
 end
 
 end
-

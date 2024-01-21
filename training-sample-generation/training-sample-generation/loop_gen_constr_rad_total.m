@@ -2,7 +2,6 @@ function loop=loop_gen_constr_rad_total(limits,nloops,dist_lat,dist_lon,dist_Ila
 %% generates parameters of radially aligned loops and their randomly
 %% for nloop current loops
 %Input params:
-%-------------
 % limits: vector containing the lower and upper limit for each
     % corresponding loop parameter - the ranges were derived from REF.m
 % nloops: number of loops to generate the loop parameters for
@@ -11,9 +10,6 @@ function loop=loop_gen_constr_rad_total(limits,nloops,dist_lat,dist_lon,dist_Ila
 % dist_Ilat: KELL?
 % dist_Ilon: KELL?
 % deg_res: lateral resolution for generating the geographic positions of the loops (in degrees)
-%Output values:
-%-------------
-% loop: matrix containing each parameter of every current loop, with dimensions (8, Nr_of_loops)
 
 d1=limits(1);
 d2=limits(2);
