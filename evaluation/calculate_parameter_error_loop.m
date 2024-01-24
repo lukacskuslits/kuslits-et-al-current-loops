@@ -1,4 +1,7 @@
 function [err,prefc]=calculate_parameter_error_loop(p,pref,m,n)
+%%Calculates the relative parameter error for a given GA estimation of the loop parameters 
+%%using the normalized parameter values
+
 mu = 4*pi*1e-7;
 dmax = 90;
 amax = 180;
@@ -64,6 +67,7 @@ disp(p)
 
 delta=zeros(m,n);
 MAXI = [dmax;amax;rmax;Imax;dmax;amax;depth_max;dtI_max];
+%Correction should be made if the closest source in space is on the opposite edge of the map in longitude.
 for ii = 1:n
     for jj = 1:m
      delta(jj,ii)=abs(prefc(jj,ii)-p(jj,ii));
