@@ -10,7 +10,7 @@ You can run the main script using 'inv_Alldredge.m'
 # training-sample-generation
 To generate a training set extract the file "test_core_new.zip" containing the historical GUFM-1 field model data and use "run_training_set_generation.m".
 
-# MagneticDann (Deep Learning (DANN trained UNet++) estimation)
+# MagneticDann (Deep Learning based estimation using a DANN trained UNet++ neural net)
 To train the UNet++ neural network for obtaining estimated distributions loop parameters (as output maps) on the generated training set data use "DannUnet.py".
 
 # GA-estimation
