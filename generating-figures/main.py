@@ -505,24 +505,45 @@ plt.show()
 
 import matplotlib.pyplot as plt
 
-SourcesNewModel = [30,50,70,90,110]
-discovered_ours = [0.833, 0.718, 0.671, 0.64, 0.6]
-discovered_alldredge = [0.068, 0.082, 0.073, 0.059, 0.054]
+SourcesOurs = [30,50,70,90,110,130]
+discovered_ours_t2 = [0.802, 0.718, 0.66, 0.628, 0.583, 0.56]
+SourcesAlldredge = [5,10,15,20,30,50,70,90,110,130]
+discovered_alldredge_t2 = [0.4, 0.25, 0.37, 0.15, 0.068, 0.082, 0.073, 0.059, 0.054, 0.05]
 
 plt.rcParams["figure.figsize"] = [7.50, 3.50]
 plt.rcParams["figure.autolayout"] = True
 fig1, axs = plt.subplots(2, 1)
-axs[0].plot(SourcesNewModel, discovered_ours, label='Using the DANN trained UNet', marker="p", markersize=20)
-axs[0].plot(SourcesNewModel, discovered_alldredge, label='Using radial field maxima (after Alldredge (1987))', marker="p", markersize=20)
+axs[0].plot(SourcesOurs, discovered_ours_t2, label='Using the DANN trained UNet', marker="p", markersize=20)
+axs[0].plot(SourcesAlldredge, discovered_alldredge_t2, label='Using radial field maxima (after Alldredge (1987))', marker="p", markersize=20)
 axs[0].tick_params(axis='x', labelsize=16)
 axs[0].tick_params(axis='y', labelsize=16)
 axs[0].set_ylim([0,1])
-#axs[0].set_title('A', fontsize=30)
+axs[0].set_title('Threshold value: $|\hat{\phi}-\phi|+|\hat{\Lambda}-\Lambda| < 8°$', fontsize=30)
 axs[0].set_xlabel('Number of loops in the model', fontsize=16)
 axs[0].set_ylabel('Ratio of "discovered" loops', fontsize=16)
 handles1, labels1 = axs[0].get_legend_handles_labels()
 by_label1 = dict(zip(labels1, handles1))
 axs[0].legend(by_label1.values(), by_label1.keys(), prop={'size': 16}, loc='center')
+plt.show()
+
+SourcesOurs = [30,50,70,90,110,130]
+discovered_ours = [0.922, 0.9, 0.909, 0.927, 0.924, 0.93]
+SourcesAlldredge = [5,10,15,20,30,50,70,90,110,130]
+discovered_alldredge = [1, 0.9, 0.83, 0.825, 0.607, 0.555, 0.563, 0.568, 0.569, 0.596]
+
+plt.rcParams["figure.figsize"] = [7.50, 3.50]
+plt.rcParams["figure.autolayout"] = True
+axs[1].plot(SourcesOurs, discovered_ours, label='Using the DANN trained UNet', marker="p", markersize=20)
+axs[1].plot(SourcesAlldredge, discovered_alldredge, label='Using radial field maxima (after Alldredge (1987))', marker="p", markersize=20)
+axs[1].tick_params(axis='x', labelsize=16)
+axs[1].tick_params(axis='y', labelsize=16)
+axs[1].set_ylim([0,1])
+axs[1].set_title('Threshold value: $|\hat{\phi}-\phi|+|\hat{\Lambda}-\Lambda| < 40°$', fontsize=30)
+axs[1].set_xlabel('Number of loops in the model', fontsize=16)
+axs[1].set_ylabel('Ratio of "discovered" loops', fontsize=16)
+handles1, labels1 = axs[1].get_legend_handles_labels()
+by_label1 = dict(zip(labels1, handles1))
+axs[1].legend(by_label1.values(), by_label1.keys(), prop={'size': 16}, loc='lower center')
 plt.show()
 
 

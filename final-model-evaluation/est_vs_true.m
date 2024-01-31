@@ -1,8 +1,10 @@
+%% Computing true and estimated field and SV data to obtain misfit values
 clear all, close all
 output = load('output_70.mat');
 outp_data = output.vals;
 input = load('input_70.mat');
 input_data = input.vals;
+%normalized input field maps
 input_data(1,:,:) = (input_data(1,:,:) - min(min(input_data(1,:,:))))/...
                   (max(max(input_data(1,:,:))) - min(min(input_data(1,:,:))));
 input_data(2,:,:) = (input_data(2,:,:) - min(min(input_data(2,:,:))))/...
@@ -43,6 +45,7 @@ disp(target)
 % zed = 100*ones(84,1);
 % scatter3(round(exp(EstCoords(2,:))),round(exp(EstCoords(1,:))),zed)
 
+%Fitting for the true (dimensional) input field maps
 load('input_data_70_dims.mat');
 load('output_data_dims.mat');
 map_dims = true_data.maps;
@@ -50,7 +53,7 @@ for mult = 1.0:0.2:2.0
     disp('MULT: ')
     disp(mult)
     tmp = output_data(3,:,:);
-    output_data(3,:,:) = mult*tmp;
+    output_data(3,:,:) = mult*tmp; % adjusting estimated loop currents
     save('output_data_dims.mat', 'output_data');
     [res_raw, sv_raw] = EstFieldForGADimsNew(EstParCoords, 90, 180, 0);
     disp(sum(sum(abs((map_dims-res_raw))))/16400)
@@ -88,24 +91,37 @@ figure(6), imagesc(sv_data_raw)
 inp_data_norm = inp_data;
 sv_data_norm = inp_sv;
 
-%%
-%%Quality metrics
-% parameter error (in case of synthetic data)
+
+%% Calculating quality measures
+% - parameter error (in case of synthetic data)
+clear all, close all
+
+% est = load('output_70.mat');
+% est = est.vals;
+% est_dtIs = squeeze(est(1,5,:,:));
+%figure(1), imagesc(est_dtIs);
+
+% final GA result for the loop parameters (after the loss converges)
+% eredmeny_control = load('eredmeny_control_oc_l_total_.mat');
+% EstCoords = eredmeny_control.eredmeny_control(:,:,500);
+EstParCoords = load('final_ga_result.mat');
+EstParCoords = EstParCoords.EstCoords;
+
 inp_data_label = load('label_70.mat');
 convert_back_to_dims('label_70.mat');
 inp_pos = squeeze(inp_data_label.vals(1, :, :));
 inp_Is = squeeze(inp_data_label.vals(3, :, :));
-figure(13), imagesc(inp_Is);
-EstCoords=coordDerive(inp_pos,.2,.001);
-EstCoords(:,34) = [1;9];
-EstCoords(:,35) = [1;82];
-TruePars = get_true_pars(EstCoords);
 
-EstPars = get_est_pars(EstParCoords, 90, 180);
-[merr, prefc] = calculate_parameter_error_loop(EstPars, TruePars, 8, 28);
-Merr = mean(mean(merr));
+TrueCoords=coordDerive(inp_pos,.2,.001);
+TruePars = get_true_pars(TrueCoords);
 
-% misfit values
+deg_res = 2;
+convert_back_to_dims('output_70.mat');
+EstPars = get_est_pars(EstParCoords, 180/deg_res, 360/deg_res);
+RPE=calculate_parameter_error_loop(EstPars,TruePars,deg_res);
+MRPE = mean(mean(RPE));
+
+% - misfit values
 disp(sum(sum(abs((map_dims-res_raw))))/16400)
 disp(max(max(abs(res_raw))))
 disp(max(max(abs(map_dims))))
@@ -119,7 +135,7 @@ disp(max(max(abs(sv_data_raw))))
 %mean abs 6.34e-14 T
 %MAE = 6.33e-14 T
 
-
+% - cross correlations
 disp(corr2(inp_data, res_est))
 disp(corr2(inp_sv, sv_est))
 %%

@@ -75,9 +75,9 @@ size_loops = ones(1,nr_of_loops);
 %norms = [2*pi*size_loops;a*size_loops;1e4*size_loops;2*pi*size_loops;2*pi*size_loops]';
 initial_loop_pars = real(exp(initial_loop_pars));
 correct_loop_pars = real(exp(correct_loop_pars));
-% ini_MPE = parameter_error_alldredge(correct_loop_pars, initial_loop_pars);
-% disp('Initial parameter error:')
-% disp(mean(mean(ini_MPE)))
+ini_MPE = parameter_error_alldredge(correct_loop_pars', initial_loop_pars');
+disp('Initial parameter error:')
+disp(mean(mean(ini_MPE)))
 
 % Saving initial loop parameters and reference SHCs
 % Kezdeti hurokparameterek es referencia gombi harmonikus egyutthatok mentese
@@ -110,7 +110,7 @@ ni = 1;
 % Forrasonkent kulon is elvegezheto, az eredmenyek nagyon hasonloak
 % maradnak
 %for loop_nr = 1:nr_of_loops
-for trial = 1:5
+for trial = 1:20
 
 % Linear inversion of K values
 % K normalt magneses momentumok megadasa linearis inverzioval
@@ -122,7 +122,7 @@ save('K.mat','K0')
 
 est_loop_pars = [alpha0; r0; log(K0'); theta0; phi0];
 est_loop_pars = real(exp(est_loop_pars));
-MPE1 = parameter_error_alldredge(correct_loop_pars, est_loop_pars');
+MPE1 = parameter_error_alldredge(correct_loop_pars', est_loop_pars);
 disp('parameter errors:')
 disp(mean(mean(MPE1)))
 
@@ -239,7 +239,7 @@ initial_pars(:,4)=phi0;
 
 est_loop_pars = [alpha0; r0; log(K0'); theta0; phi0];
 est_loop_pars = real(exp(est_loop_pars));
-MPE2 = parameter_error_alldredge(correct_loop_pars, est_loop_pars');
+MPE2 = parameter_error_alldredge(correct_loop_pars', est_loop_pars);
 disp('parameter errors:')
 disp(mean(mean(MPE2)))
 
@@ -250,7 +250,8 @@ end
 % Vegso parameterbecslesi hiba megadasa
 est_loop_pars = [alpha0; r0; log(K0'); theta0; phi0];
 est_loop_pars = real(exp(est_loop_pars));
-MPE3 = parameter_error_alldredge(correct_loop_pars, est_loop_pars');
+RPE = parameter_error_alldredge(correct_loop_pars', est_loop_pars);
+MRPE = mean(mean(RPE));
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -259,7 +260,9 @@ MPE3 = parameter_error_alldredge(correct_loop_pars, est_loop_pars');
 % Provided that \delta (alpha0,K0) = 5%; \delta (r0) = 10%
 % theta0: 1e-2; phi0: 1e-2; ini_MPE: 0.0697 --> MPE: 0.0689 | decr_ratio = -0.115 
 % theta0: 5e-2; phi0: 5e-2; ini_MPE: 0.1272 --> MPE: 0.1126 | decr_ratio = -0.115
-% theta0: 1e-1; phi0: 1e-1; ini_MPE: 0.2211 --> MPE: 0.2257 | decr_ratio = 0.0208 
+% theta0: 1e-1; phi0: 1e-1; ini_MPE: 0.2154 --> MPE: 0.2195 | decr_ratio = 0.019 
+%In case of 5 loops: final RPE after 20 iterations, with RMSE reaching convergence:
+%--> 0.2654
 
 % Initial parameter estimation error: 10 loops
 % Provided that \delta (alpha0,K0) = 5%; \delta (r0) = 10%
