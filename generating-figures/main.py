@@ -505,8 +505,8 @@ plt.show()
 
 import matplotlib.pyplot as plt
 
-SourcesOurs = [30,50,70,90,110,130]
-discovered_ours_t2 = [0.802, 0.718, 0.66, 0.628, 0.583, 0.56]
+SourcesOurs = [5,10,15,20,30,50,70,90,110,130]
+discovered_ours_t2 = [0.2, 0.0, 0.0, 0.05, 0.802, 0.718, 0.66, 0.628, 0.583, 0.56]
 SourcesAlldredge = [5,10,15,20,30,50,70,90,110,130]
 discovered_alldredge_t2 = [0.4, 0.25, 0.37, 0.15, 0.068, 0.082, 0.073, 0.059, 0.054, 0.05]
 
@@ -526,8 +526,8 @@ by_label1 = dict(zip(labels1, handles1))
 axs[0].legend(by_label1.values(), by_label1.keys(), prop={'size': 16}, loc='center')
 plt.show()
 
-SourcesOurs = [30,50,70,90,110,130]
-discovered_ours = [0.922, 0.9, 0.909, 0.927, 0.924, 0.93]
+SourcesOurs = [5,10,15,20,30,50,70,90,110,130]
+discovered_ours = [0.6, 0.7, 0.6, 0.65, 0.922, 0.9, 0.909, 0.927, 0.924, 0.93]
 SourcesAlldredge = [5,10,15,20,30,50,70,90,110,130]
 discovered_alldredge = [1, 0.9, 0.83, 0.825, 0.607, 0.555, 0.563, 0.568, 0.569, 0.596]
 
@@ -612,6 +612,26 @@ handles1, labels1 = axs[0].get_legend_handles_labels()
 by_label1 = dict(zip(labels1, handles1))
 axs[0].legend(by_label1.values(), by_label1.keys(), prop={'size': 16}, loc='upper center')
 plt.show()
+
+#------------------------------------------- Convergence of RMSE using the Alldredge method (5 loops, delta phi; alpha = 10%) --------------------------------------------
+rmse_vals = [79.269944, 79.094059, 78.933225, 78.769889, 78.606711, 78.469997, 78.337548, 78.211499, 78.098986,\
+ 77.998201, 77.905992, 77.851962, 77.803719, 77.772529, 77.744613, 77.719559, 77.696318, 77.674218, 77.652864, 77.631951]
+iterations = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+import matplotlib.pyplot as plt
+
+plt.rcParams["figure.figsize"] = [7.50, 3.50]
+plt.rcParams["figure.autolayout"] = True
+fig1, axs = plt.subplots(2, 1)
+axs[0].plot(iterations, rmse_vals, marker="x", markersize=20)
+axs[0].tick_params(axis='x', labelsize=16)
+axs[0].tick_params(axis='y', labelsize=14)
+axs[0].set_ylim([77.5,79.5])
+#axs[0].set_title('A', fontsize=30)
+axs[0].set_xlabel("Number of full iterations with the algorithm of Alldredge (1987)", fontsize=16)
+axs[0].set_ylabel("Misfit of SHCs ($RMS$)", fontsize=16)
+axs[0].set_xticks([5,10,15,20])
+plt.show()
+
 
 
 ## --------------------------reconstruction w noise ----------------------------------------------------

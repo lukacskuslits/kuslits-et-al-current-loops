@@ -1,10 +1,10 @@
 % %% Count how many sources were 'detected' using Deep Learning
 clear all, close all
-source_nr = 130;
+source_nr = 20;
 indexes = load(['relevant_index_',num2str(source_nr),'.txt'], '-ascii');
 indexes = indexes(indexes>0);
 % Thershold value to define the successful identifitacion of a loop
-threshold = 10; 
+threshold = 2; 
 
 discovered_loops_all = zeros(1,length(indexes));
 ii = 1;
@@ -13,7 +13,12 @@ for index = indexes
     disp(index)
     label = load(['label_', num2str(index), '.mat']);
     output = load(['output_', num2str(index), '.mat']);
-    label_data = label.vals;
+    if source_nr<30
+     label_data = label.label;
+    else
+     label_data = label.vals;
+    end
+
     output_data = output.vals;
 
     outp_pos = squeeze(output_data(1,1,:,:));
@@ -38,6 +43,10 @@ set_size = length(indexes);
 
 %% In the manuscript
 % Nr.| Dl   | Dr    | Set
+% 5  | 1    | 20%   | 2
+% 10 | 0    | 0%    | 2
+% 15 | 0    | 0%    | 2
+% 20 | 1    | 5%    | 2
 % 30 | 24.05| 80.2% | 20
 % 50 | 35.9 | 71.8% | 50
 % 70 | 46.2 | 66%   | 50
@@ -47,6 +56,10 @@ set_size = length(indexes);
 % 150|------------->| 0
 
 %(With a threshold value of 10:
+% 5  | 3    | 60%   | 2
+% 10 | 7    | 70%   | 2
+% 15 | 9    | 60%   | 2
+% 20 | 13   | 65%   | 2
 % 30 | 27.65| 92.2% | 20
 % 50 | 44.98| 90%   | 50
 % 70 | 63.6 | 90.9% | 50
