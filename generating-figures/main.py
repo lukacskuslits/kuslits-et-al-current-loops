@@ -513,14 +513,14 @@ discovered_alldredge_t2 = [0.4, 0.25, 0.37, 0.15, 0.068, 0.082, 0.073, 0.059, 0.
 plt.rcParams["figure.figsize"] = [7.50, 3.50]
 plt.rcParams["figure.autolayout"] = True
 fig1, axs = plt.subplots(2, 1)
-axs[0].plot(SourcesOurs, discovered_ours_t2, label='Using the DANN trained UNet', marker="p", markersize=20)
+axs[0].plot(SourcesOurs, discovered_ours_t2, label='Using the DANN trained UNet (utiziled by CLUMSI)', marker="p", markersize=20)
 axs[0].plot(SourcesAlldredge, discovered_alldredge_t2, label='Using radial field maxima (after Alldredge (1987))', marker="p", markersize=20)
 axs[0].tick_params(axis='x', labelsize=16)
 axs[0].tick_params(axis='y', labelsize=16)
 axs[0].set_ylim([0,1])
-axs[0].set_title('Threshold value: $|\hat{\phi}-\phi|+|\hat{\Lambda}-\Lambda| < 8°$', fontsize=30)
+axs[0].set_title('Criterion for a loop to count as discovered: $|\hat{\phi_l}-\phi_l|+|\hat{\Lambda_l}-\Lambda_l| < 4°$', fontsize=30)
 axs[0].set_xlabel('Number of loops in the model', fontsize=16)
-axs[0].set_ylabel('Ratio of "discovered" loops', fontsize=16)
+axs[0].set_ylabel('Ratio of discovered loops', fontsize=16)
 handles1, labels1 = axs[0].get_legend_handles_labels()
 by_label1 = dict(zip(labels1, handles1))
 axs[0].legend(by_label1.values(), by_label1.keys(), prop={'size': 16}, loc='center')
@@ -533,14 +533,14 @@ discovered_alldredge = [1, 0.9, 0.83, 0.825, 0.607, 0.555, 0.563, 0.568, 0.569, 
 
 plt.rcParams["figure.figsize"] = [7.50, 3.50]
 plt.rcParams["figure.autolayout"] = True
-axs[1].plot(SourcesOurs, discovered_ours, label='Using the DANN trained UNet', marker="p", markersize=20)
+axs[1].plot(SourcesOurs, discovered_ours, label='Using the DANN trained UNet (utiziled by CLUMSI)', marker="p", markersize=20)
 axs[1].plot(SourcesAlldredge, discovered_alldredge, label='Using radial field maxima (after Alldredge (1987))', marker="p", markersize=20)
 axs[1].tick_params(axis='x', labelsize=16)
 axs[1].tick_params(axis='y', labelsize=16)
 axs[1].set_ylim([0,1])
-axs[1].set_title('Threshold value: $|\hat{\phi}-\phi|+|\hat{\Lambda}-\Lambda| < 40°$', fontsize=30)
+axs[1].set_title('Criterion for a loop to count as discovered: $|\hat{\phi_l}-\phi_l|+|\hat{\Lambda_l}-\Lambda_l| < 20°$', fontsize=30)
 axs[1].set_xlabel('Number of loops in the model', fontsize=16)
-axs[1].set_ylabel('Ratio of "discovered" loops', fontsize=16)
+axs[1].set_ylabel('Ratio of discovered loops', fontsize=16)
 handles1, labels1 = axs[1].get_legend_handles_labels()
 by_label1 = dict(zip(labels1, handles1))
 axs[1].legend(by_label1.values(), by_label1.keys(), prop={'size': 16}, loc='lower center')
@@ -564,30 +564,30 @@ import matplotlib.pyplot as plt
 plt.rcParams["figure.figsize"] = [7.50, 3.50]
 plt.rcParams["figure.autolayout"] = True
 fig1, axs = plt.subplots(2, 1)
-axs[0].plot(SourcesNewModel, ErrNewModel, label="Updated current loop models reconstructed with the refined inference algorithm", marker="p", markersize=16) #'Időben lineárisan változó radiális állású köráram-modell'
+axs[0].plot(SourcesNewModel, ErrNewModel, label="Updated current loop models reconstructed with CLUMSI", marker="p", markersize=16) #'Időben lineárisan változó radiális állású köráram-modell'
 #axs[0].plot(SourcesFreeOrigModel, ErrFreeOrigModel, label="Previous (static) current loop model using arbitrarily aligned loops", marker="v", markersize=20) #'Egyenáramú tetszőleges állású köráram-modell'
-axs[0].plot(SourcesRadialOrigModel, ErrRadialOrigModel, label="Static current loop models reconstructed with the previous inference algorithm", marker="o", markersize=16) #'Egyenáramú radiális állású köráram-modell'
-axs[0].tick_params(axis='x', labelsize=14)
-axs[0].tick_params(axis='y', labelsize=14)
+axs[0].plot(SourcesRadialOrigModel, ErrRadialOrigModel, label="Static loop models reconstructed with the previous inference algorithm", marker="o", markersize=16) #'Egyenáramú radiális állású köráram-modell'
+axs[0].tick_params(axis='x', labelsize=20)
+axs[0].tick_params(axis='y', labelsize=20)
 axs[0].set_ylim([0,0.25])
 #axs[0].set_title('A', fontsize=30)
-axs[0].set_xlabel("Number of loops in the model", fontsize=14) #'Források darabszáma a modellben'
-axs[0].set_ylabel("Parameter error ($RPE(\hat{Par},Par)$)", fontsize=14)
+axs[0].set_xlabel("Number of loops in the model", fontsize=20) #'Források darabszáma a modellben'
+axs[0].set_ylabel("Parameter error ($RPE(\hat{Par},Par)$)", fontsize=20)
 handles1, labels1 = axs[0].get_legend_handles_labels()
 by_label1 = dict(zip(labels1, handles1))
-axs[0].legend(by_label1.values(), by_label1.keys(), prop={'size': 14}, loc='upper center')
-axs[1].plot(SourcesNewModel, NRMSNewModel, label="Updated current loop models reconstructed with the refined inference algorithm", marker="p", markersize=16) #'Időben lineárisan változó radiális állású köráram-modell'
+axs[0].legend(by_label1.values(), by_label1.keys(), prop={'size': 20}, loc='upper center')
+axs[1].plot(SourcesNewModel, NRMSNewModel, label="Updated current loop models reconstructed with CLUMSI", marker="p", markersize=16) #'Időben lineárisan változó radiális állású köráram-modell'
 #axs[1].plot(SourcesFreeOrigModel, NRMSFreeOrigModel, label="Previous (static) current loop model using arbitrarily aligned loops", marker="v", markersize=20) #'Egyenáramú tetszőleges állású köráram-modell'
-axs[1].plot(SourcesRadialOrigModel, NRMSRadialOrigModel, label="Static current loop models reconstructed with the previous inference algorithm", marker="o", markersize=16) #'Egyenáramú radiális állású köráram-modell'
-axs[1].tick_params(axis='x', labelsize=14)
-axs[1].tick_params(axis='y', labelsize=14)
+axs[1].plot(SourcesRadialOrigModel, NRMSRadialOrigModel, label="Static loop models reconstructed with the previous inference algorithm", marker="o", markersize=16) #'Egyenáramú radiális állású köráram-modell'
+axs[1].tick_params(axis='x', labelsize=20)
+axs[1].tick_params(axis='y', labelsize=20)
 axs[1].set_ylim([0,0.25])
 #axs[0].set_title('A', fontsize=30)
-axs[1].set_xlabel("Number of loops in the model", fontsize=14) #'Források darabszáma a modellben'
-axs[1].set_ylabel("Misfit measure ($NRMS(\hat{B},B)$)", fontsize=14) #'Az illeszkedés hibája ($NRMS(\hat{B},B)$)'
+axs[1].set_xlabel("Number of loops in the model", fontsize=20) #'Források darabszáma a modellben'
+axs[1].set_ylabel("Misfit measure ($NRMS(\hat{B},B)$)", fontsize=20) #'Az illeszkedés hibája ($NRMS(\hat{B},B)$)'
 handles1, labels1 = axs[0].get_legend_handles_labels()
 by_label1 = dict(zip(labels1, handles1))
-axs[1].legend(by_label1.values(), by_label1.keys(), prop={'size': 14}, loc='upper center')
+axs[1].legend(by_label1.values(), by_label1.keys(), prop={'size': 20}, loc='upper center')
 plt.show()
 
 #------------------------------------------- results of final reconstruction using the Alldredge method --------------------------------------------
@@ -614,22 +614,21 @@ axs[0].legend(by_label1.values(), by_label1.keys(), prop={'size': 16}, loc='uppe
 plt.show()
 
 #------------------------------------------- Convergence of RMSE using the Alldredge method (5 loops, delta phi; alpha = 10%) --------------------------------------------
-import numpy as np
-rmse_vals = np.sqrt(np.array([79.269944, 79.094059, 78.933225, 78.769889, 78.606711, 78.469997, 78.337548, 78.211499, 78.098986,\
- 77.998201, 77.905992, 77.851962, 77.803719, 77.772529, 77.744613, 77.719559, 77.696318, 77.674218, 77.652864, 77.631951]))
-iterations = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20])
+rmse_vals = [79.269944, 79.094059, 78.933225, 78.769889, 78.606711, 78.469997, 78.337548, 78.211499, 78.098986,\
+ 77.998201, 77.905992, 77.851962, 77.803719, 77.772529, 77.744613, 77.719559, 77.696318, 77.674218, 77.652864, 77.631951]
+iterations = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 import matplotlib.pyplot as plt
 
 plt.rcParams["figure.figsize"] = [7.50, 3.50]
 plt.rcParams["figure.autolayout"] = True
 fig1, axs = plt.subplots(2, 1)
 axs[0].plot(iterations, rmse_vals, marker="x", markersize=20)
-axs[0].tick_params(axis='x', labelsize=16)
-axs[0].tick_params(axis='y', labelsize=14)
-axs[0].set_ylim([8.8,8.93])
+axs[0].tick_params(axis='x', labelsize=20)
+axs[0].tick_params(axis='y', labelsize=20)
+axs[0].set_ylim([77.5,79.5])
 #axs[0].set_title('A', fontsize=30)
-axs[0].set_xlabel("Number of full iterations", fontsize=16)
-axs[0].set_ylabel("Misfit of SHC ($RMS$)", fontsize=16)
+axs[0].set_xlabel("Number of full iterations", fontsize=20)
+axs[0].set_ylabel("Misfit of SHC ($RMS$ [nT])", fontsize=20)
 axs[0].set_xticks([5,10,15,20])
 plt.show()
 
