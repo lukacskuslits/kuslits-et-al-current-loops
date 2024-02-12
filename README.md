@@ -7,18 +7,18 @@ See the corresponding files in 'Alldredge-method/inversion'.\\
 A more standard linear-non-linear inversion approach used by Alldredge (1987). \\
 You can run the main script using 'inv_Alldredge.m'
 
-# training-sample-generation
+## training-sample-generation
 To generate a training set extract the file "test_core_new.zip" containing the historical GUFM-1 field model data and use "run_training_set_generation.m".
 
-# MagneticDann (Deep Learning based estimation using a DANN trained UNet++ neural net)
+## MagneticDann (Deep Learning based estimation using a DANN trained UNet++ neural net)
 To train the UNet++ neural network for obtaining estimated distributions loop parameters (as output maps) on the generated training set data use "DannUnet.py".
 
-# GA-estimation
+## GA-estimation
 You can run a Genetic Algorithm based (GA) estimation for obtaining final estimations of loop parameters with "launch_and_prepare_ga_new.m"
 
-# final-model-evaluation
+## final-model-evaluation
 Calculates the quality parameters of the final estimated loop model against the actual (ground truth) model using the script "est_vs_true.m".
 
-# tests
+## tests
 'eval_test_data_loop_discovery.m': Calculates the accuracy of the deep learning methodology for recovering initial loop positions on a given test set stored in 'current-loops-data.zip', and compares that against the recovery method of initial loop positions according to Alldredge (1987).
 'eval_test_data_cross_correlations.m': Calculates the 2d Cross Correlation Coefficiens between true and recovered loop parameter distributions on a given test set stored in 'current-loops-data.zip'.
