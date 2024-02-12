@@ -2,7 +2,7 @@
 Methodology searching for concentrations of electric currents in Earth's outer core using an alternate model of the geomagnetic field and deep learning.
 Codes are developed and can run in a MATLAB R2014b environment.
 
-# Alldredge-method
+## Alldredge-method
 See the corresponding files in 'Alldredge-method/inversion'.\\
 A more standard linear-non-linear inversion approach used by Alldredge (1987). \\
 You can run the main script using 'inv_Alldredge.m'
