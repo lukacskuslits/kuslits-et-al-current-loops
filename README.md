@@ -1,6 +1,6 @@
 # kuslits-et-al-current-loops
 Methodology searching for concentrations of electric currents in Earth's outer core using an alternate model of the geomagnetic field and deep learning.
-Codes are developed and can run in a MATLAB R2014b environment.
+Codes are developed and can run in MATLAB R2014b and python 3.10 environments.
 
 ## Alldredge-method
 See the corresponding files in 'Alldredge-method/inversion'.\\
