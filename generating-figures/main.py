@@ -433,7 +433,7 @@ plt.imshow(output_pos)
 plt.figure(2)
 plt.imshow(true_pos)
 
-
+í
 
 SourcesNewModel = [15,20,35,65,85]
 
@@ -446,11 +446,23 @@ corr_dtI = np.insert(corr_dtI,[1],np.mean([corr_dtI[0],corr_dtI[1]]))
 ##
 
 import matplotlib.pyplot as plt
+# In the thesis
 corr_pos = [0.8422618561066929, 0.8526829818210404, 0.8631041075353879, 0.6740997205951182, 0.6723300897553502]
 corr_depth = [0.8538766382815957, 0.8610204088801974, 0.8681641794787991, 0.6903726409975961, 0.6975223971608122]
 corr_rad = [0.7546442258310492, 0.7908358597667038, 0.8270274937023584, 0.6432681573159427, 0.6519590268913915]
 corr_I = [0.8540662269222554, 0.859566688757154, 0.8650671505920526, 0.6793126774867799, 0.6883633995211349]
 corr_dtI = [0.8220283539276287, 0.8100445643452288, 0.7980607747628288, 0.5277529259815933, 0.4751501863479285]
+
+#TODO: Uípdate data w those in the article
+SourcesNewModel = [30,50,70,90,110]   #130, 150
+corr_pos = [0.8422618561066929, 0.8526829818210404, 0.8631041075353879, 0.6740997205951182, 0.6723300897553502]
+corr_depth = [0.8538766382815957, 0.8610204088801974, 0.8681641794787991, 0.6903726409975961, 0.6975223971608122]
+corr_rad = [0.7546442258310492, 0.7908358597667038, 0.8270274937023584, 0.6432681573159427, 0.6519590268913915]
+corr_I = [0.8540662269222554, 0.859566688757154, 0.8650671505920526, 0.6793126774867799, 0.6883633995211349]
+corr_dtI = [0.8220283539276287, 0.8100445643452288, 0.7980607747628288, 0.5277529259815933, 0.4751501863479285]
+
+yerr_0 = [(0.95+0.62)/2, (0.95+0.62)/2, (0.95+0.62)/2, (0.95+0.62)/2, (0.95+0.62)/2]
+yerr_1 = [0.95-0.62, 0.95-0.62, 0.95-0.62, 0.95-0.62, 0.95-0.62]
 
 plt.rcParams["figure.figsize"] = [7.50, 3.50]
 plt.rcParams["figure.autolayout"] = True
@@ -463,7 +475,7 @@ axs[0].plot(SourcesNewModel, corr_dtI, label='Forrás áramaváltozás $dI/dt$',
 axs[0].tick_params(axis='x', labelsize=16)
 axs[0].tick_params(axis='y', labelsize=16)
 axs[0].set_ylim([0,1])
-#axs[0].set_title('A', fontsize=30)
+axs[0].errorbar(SourcesNewModel, yerr_0, xerr=0, yerr=yerr_1, fmt='o')
 axs[0].set_xlabel('Források darabszáma a modellben', fontsize=16)
 axs[0].set_ylabel('Keresztkorrelációs együttható értéke', fontsize=16)
 handles1, labels1 = axs[0].get_legend_handles_labels()
