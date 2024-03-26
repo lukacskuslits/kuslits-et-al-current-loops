@@ -433,7 +433,7 @@ plt.imshow(output_pos)
 plt.figure(2)
 plt.imshow(true_pos)
 
-í
+import matplotlib.pyplot as plt
 
 SourcesNewModel = [15,20,35,65,85]
 
@@ -454,15 +454,16 @@ corr_I = [0.8540662269222554, 0.859566688757154, 0.8650671505920526, 0.679312677
 corr_dtI = [0.8220283539276287, 0.8100445643452288, 0.7980607747628288, 0.5277529259815933, 0.4751501863479285]
 
 #TODO: Uípdate data w those in the article
-SourcesNewModel = [30,50,70,90,110]   #130, 150
-corr_pos = [0.8422618561066929, 0.8526829818210404, 0.8631041075353879, 0.6740997205951182, 0.6723300897553502]
-corr_depth = [0.8538766382815957, 0.8610204088801974, 0.8681641794787991, 0.6903726409975961, 0.6975223971608122]
-corr_rad = [0.7546442258310492, 0.7908358597667038, 0.8270274937023584, 0.6432681573159427, 0.6519590268913915]
-corr_I = [0.8540662269222554, 0.859566688757154, 0.8650671505920526, 0.6793126774867799, 0.6883633995211349]
-corr_dtI = [0.8220283539276287, 0.8100445643452288, 0.7980607747628288, 0.5277529259815933, 0.4751501863479285]
+import matplotlib.pyplot as plt
+SourcesNewModel = [30,50,70,90,110, 130, 150]
+corr_pos = [0.834, 0.879, 0.85, 0.833, 0.806, 0.784, 0.745]
+corr_depth = [0.915, 0.89, 0.863, 0.8516, 0.823, 0.801, 0.755]
+corr_rad = [0.843, 0.89, 0.855, 0.842, 0.82, 0.794, 0.75]
+corr_I = [0.822, 0.84, 0.81, 0.8, 0.785, 0.77, 0.733]
+corr_dtI = [0.77, 0.82, 0.78, 0.77, 0.74, 0.732, 0.7]
 
-yerr_0 = [(0.95+0.62)/2, (0.95+0.62)/2, (0.95+0.62)/2, (0.95+0.62)/2, (0.95+0.62)/2]
-yerr_1 = [0.95-0.62, 0.95-0.62, 0.95-0.62, 0.95-0.62, 0.95-0.62]
+yerr_0 = [(0.92+0.72)/2, (0.97+0.623)/2, (0.92+0.67)/2, (0.9+0.64)/2, (0.88+0.63)/2, (0.878+0.61)/2, (0.793+0.635)/2]
+yerr_1 = [(0.92-0.72)/2, (0.97-0.623)/2, (0.92-0.67)/2, (0.9-0.64)/2, (0.88-0.63)/2, (0.878-0.61)/2, (0.793-0.635)/2]
 
 plt.rcParams["figure.figsize"] = [7.50, 3.50]
 plt.rcParams["figure.autolayout"] = True
@@ -647,6 +648,24 @@ plt.show()
 
 
 ## --------------------------reconstruction w noise ----------------------------------------------------
+import matplotlib
+import matplotlib.pyplot as plt
+SigmaVals = [0, 0.05, 0.1, 0.2]
+RPE_25 = [0.085, 0.1, 0.137, 0.196]
+recon_err = [0.05, 0.048, 0.046, 0.045]
+
+matplotlib.rcParams.update({'font.size': 22})
+
+plt.plot(SigmaVals, RPE_25, label='RPE', marker='*', color='blue', markersize=28, linestyle="dashed")
+plt.plot(SigmaVals, recon_err, label='$NRMS$', marker='o', color='red', markersize=22, linestyle="dashed")
+plt.xlabel('Noise level ($\Sigma$)')
+plt.ylabel('Quality parameter value')
+plt.legend()
+plt.savefig('rpe_graph.jpg')
+plt.show()
+
+
+SigmaVals = [0, 0.1, 0.2]
 CrossCorr25Pos = [0.9, 0.65, 0.5]
 CrossCorr25Rads = [0.91, 0.65, 0.51]
 CrossCorr25Is = [0.75, 0.55, 0.35]
@@ -657,45 +676,44 @@ CrossCorr100Pos = [0.67, 0.25, 0.1]
 CrossCorr100Rads = [0.7, 0.11, 0.03]
 CrossCorr100Is = [0.65, 0.09, 0.01]
 CrossCorr100Depths = [0.69, 0.05, -0.01]
-CrossCorr100dtIs = [0.48, 0.1, 0.02]
+CrossCorr100dtIs = [0.62, 0.1, 0.02]
 
-SigmaVals = [0, 0.1, 0.2]
-
-
-import matplotlib.pyplot as plt
-
-plt.rcParams["figure.figsize"] = [7.50, 3.50]
+plt.rcParams["figure.figsize"] = [7.50, 1.50]
 plt.rcParams["figure.autolayout"] = True
 fig1, axs = plt.subplots(1, 2)
-axs[0].plot(SigmaVals, CrossCorr25Pos, label='Földrajzi hely $(\Phi,\Lambda)$', marker="p", markersize=16)
-axs[0].plot(SigmaVals, CrossCorr25Depths, label='Földközépponti sugártávolság $r$', marker="p", markersize=16)
-axs[0].plot(SigmaVals, CrossCorr25Rads, label='Forrás sugár $R$', marker="p", markersize=16)
-axs[0].plot(SigmaVals, CrossCorr25Is, label='Forrás áramerősség $I$', marker="p", markersize=16)
-axs[0].plot(SigmaVals, CrossCorr25dtIs, label='Forrás áramaváltozás $dI/dt$', marker="p", markersize=16)
-axs[0].tick_params(axis='x', labelsize=16)
-axs[0].tick_params(axis='y', labelsize=16)
+axs[0].plot(SigmaVals, CrossCorr25Pos, marker="p", markersize=20)
+axs[0].plot(SigmaVals, CrossCorr25Depths, marker="p", markersize=20)
+axs[0].plot(SigmaVals, CrossCorr25Rads, marker="p", markersize=20)
+axs[0].plot(SigmaVals, CrossCorr25Is, marker="p", markersize=20)
+axs[0].plot(SigmaVals, CrossCorr25dtIs, marker="p", markersize=20)
+axs[0].tick_params(axis='x', labelsize=20)
+axs[0].tick_params(axis='y', labelsize=20)
+axs[0].locator_params(nbins=4, axis='x')
 axs[0].set_ylim([0,1])
-axs[0].set_title('Rekonstrukció alakulása 25 forrás esetén', fontsize=16)
-axs[0].set_xlabel('Zajszint ($\sigma$)', fontsize=16)
-axs[0].set_ylabel('Keresztkorrelációk ($Corr(\hat{P}(\Phi,\Lambda,\sigma), P(\Phi,\Lambda))$)', fontsize=16)
+axs[0].set_title('Response of reconstruction to noise (25 loops)', fontsize=20) #'Rekonstrukció alakulása 25 forrás esetén'
+axs[0].set_xlabel('Noise level ($\Sigma$)', fontsize=20) #'Zajszint ($\Sigma$)'
+#TODO: large hat symbol is required for Par(\Phi,\Lambda,\Sigma) below, and Par needs to be bold
+axs[0].set_ylabel('Cross correlation coefficients ($CCC(Par(\Phi,\Lambda,\Sigma), Par(\Phi,\Lambda))$)', fontsize=20) #'Keresztkorrelációk ($Corr(\hat{P}(\Phi,\Lambda,\sigma), P(\Phi,\Lambda))$)'
 handles1, labels1 = axs[0].get_legend_handles_labels()
 #by_label1 = dict(zip(labels1, handles1))
 #axs[0].legend(by_label1.values(), by_label1.keys(), prop={'size': 16}, loc='lower right')
 ##
-axs[1].plot(SigmaVals, CrossCorr100Pos, label='Földrajzi hely $(\Phi,\Lambda)$', marker="p", markersize=16)
-axs[1].plot(SigmaVals, CrossCorr100Depths, label='Földközépponti sugártávolság $r$', marker="p", markersize=16)
-axs[1].plot(SigmaVals, CrossCorr100Rads, label='Forrás sugár $R$', marker="p", markersize=16)
-axs[1].plot(SigmaVals, CrossCorr100Is, label='Forrás áramerősség $I$', marker="p", markersize=16)
-axs[1].plot(SigmaVals, CrossCorr100dtIs, label='Forrás áramaváltozás $dI/dt$', marker="p", markersize=16)
-axs[1].tick_params(axis='x', labelsize=16)
-axs[1].tick_params(axis='y', labelsize=16)
+axs[1].plot(SigmaVals, CrossCorr100Pos, label='Geographic position $(\Phi,\Lambda)$', marker="p", markersize=20) #'Földrajzi hely $(\Phi,\Lambda)$'
+axs[1].plot(SigmaVals, CrossCorr100Depths, label='Geocentric distance $r$', marker="p", markersize=20) #Földközépponti sugártávolság $r$'
+axs[1].plot(SigmaVals, CrossCorr100Rads, label='Loop radius $R$', marker="p", markersize=20) #'Forrás sugár $R$'
+axs[1].plot(SigmaVals, CrossCorr100Is, label='Loop current $I$', marker="p", markersize=20) #'Forrás áramerősség $I$'
+axs[1].plot(SigmaVals, CrossCorr100dtIs, label='Time variation of loop current $dI/dt$', marker="p", markersize=20) #'Forrás áramaváltozás $dI/dt$'
+axs[1].tick_params(axis='x', labelsize=20)
+axs[1].tick_params(axis='y', labelsize=20)
 axs[1].set_ylim([-0.05,1])
-axs[1].set_title('Rekonstrukció alakulása 100 forrás esetén', fontsize=16)
-axs[1].set_xlabel('Zajszint ($\sigma$)', fontsize=16)
-axs[1].set_ylabel('Keresztkorrelációk ($CCC(\hat{p}(\Phi,\Lambda,\sigma), p(\Phi,\Lambda))$)', fontsize=16)
+axs[1].locator_params(nbins=4, axis='x')
+axs[1].set_title('Response of reconstruction to noise (100 loops)', fontsize=20) #'Rekonstrukció alakulása 100 forrás esetén'
+axs[1].set_xlabel('Noise level ($\Sigma$)', fontsize=20) #'Zajszint ($\sigma$)'
+#TODO: large hat symbol is required for Par(\Phi,\Lambda,\Sigma) below, and Par needs to be bold
+axs[1].set_ylabel('Cross correlations ($CCC(Par(\Phi,\Lambda,\Sigma), Par(\Phi,\Lambda))$)', fontsize=20) #'Keresztkorrelációk ($CCC(\hat{p}(\Phi,\Lambda,\sigma), p(\Phi,\Lambda))$)'
 handles1, labels1 = axs[1].get_legend_handles_labels()
 by_label1 = dict(zip(labels1, handles1))
-axs[1].legend(by_label1.values(), by_label1.keys(), prop={'size': 16}, loc='upper right')
+axs[1].legend(by_label1.values(), by_label1.keys(), prop={'size': 20}, loc='upper right')
 plt.savefig('err_graphs_noise.jpg')
 plt.show()
 
