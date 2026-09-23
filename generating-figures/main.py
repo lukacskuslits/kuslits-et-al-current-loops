@@ -693,7 +693,7 @@ axs[0].set_ylim([0,1])
 axs[0].set_title('Response of reconstruction to noise (25 loops)', fontsize=20) #'Rekonstrukció alakulása 25 forrás esetén'
 axs[0].set_xlabel('Noise level ($\Sigma$)', fontsize=20) #'Zajszint ($\Sigma$)'
 #TODO: large hat symbol is required for Par(\Phi,\Lambda,\Sigma) below, and Par needs to be bold
-axs[0].set_ylabel('Cross correlation coefficients ($CCC(Par(\Phi,\Lambda,\Sigma), Par(\Phi,\Lambda))$)', fontsize=20) #'Keresztkorrelációk ($Corr(\hat{P}(\Phi,\Lambda,\sigma), P(\Phi,\Lambda))$)'
+axs[0].set_ylabel('Cross correlation coefficients ($CCC(\hat{Par(\Phi,\Lambda,\Sigma)}, Par(\Phi,\Lambda))$)', fontsize=20) #'Keresztkorrelációk ($Corr(\hat{P}(\Phi,\Lambda,\sigma), P(\Phi,\Lambda))$)'
 handles1, labels1 = axs[0].get_legend_handles_labels()
 #by_label1 = dict(zip(labels1, handles1))
 #axs[0].legend(by_label1.values(), by_label1.keys(), prop={'size': 16}, loc='lower right')
@@ -710,7 +710,7 @@ axs[1].locator_params(nbins=4, axis='x')
 axs[1].set_title('Response of reconstruction to noise (100 loops)', fontsize=20) #'Rekonstrukció alakulása 100 forrás esetén'
 axs[1].set_xlabel('Noise level ($\Sigma$)', fontsize=20) #'Zajszint ($\sigma$)'
 #TODO: large hat symbol is required for Par(\Phi,\Lambda,\Sigma) below, and Par needs to be bold
-axs[1].set_ylabel('Cross correlations ($CCC(Par(\Phi,\Lambda,\Sigma), Par(\Phi,\Lambda))$)', fontsize=20) #'Keresztkorrelációk ($CCC(\hat{p}(\Phi,\Lambda,\sigma), p(\Phi,\Lambda))$)'
+axs[1].set_ylabel('Cross correlations ($CCC(\hat{Par(\Phi,\Lambda,\Sigma)}, Par(\Phi,\Lambda))$)', fontsize=20) #'Keresztkorrelációk ($CCC(\hat{p}(\Phi,\Lambda,\sigma), p(\Phi,\Lambda))$)'
 handles1, labels1 = axs[1].get_legend_handles_labels()
 by_label1 = dict(zip(labels1, handles1))
 axs[1].legend(by_label1.values(), by_label1.keys(), prop={'size': 20}, loc='upper right')
