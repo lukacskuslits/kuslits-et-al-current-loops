@@ -59,3 +59,13 @@ class ShtnsObjects:
 class GalerkinRepr:
     band_nr: int = 6  # Maximum degree of basis functions
     resolution: int = 100  # Resolution of numerical integrations
+
+
+@dataclass(frozen=True)
+class BaseFuncArrays:
+    B_norm_gs: torch.tensor  # Gram-Schmidt normalization of the Galerkin base
+    normalization_mx: torch.tensor
+    Psi_mx: torch.tensor
+    Psi_prime_mx: torch.tensor
+    Elsasser_mx: torch.tensor
+    B_mx: torch.tensor
